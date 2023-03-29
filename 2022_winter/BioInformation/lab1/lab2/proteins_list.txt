@@ -1,0 +1,47 @@
+serum albumin [Homo sapiens]https://www.ncbi.nlm.nih.gov/protein/AAN17825.1
+//histone [Homo sapiens] https://www.ncbi.nlm.nih.gov/protein/AAC61625.1
+//ferritin [Homo sapiens] https://www.ncbi.nlm.nih.gov/protein/AAA35832.1
+//Protein C [Homo sapiens] https://www.ncbi.nlm.nih.gov/protein/AAA60166.1
+//collagen [Homo sapiens] https://www.ncbi.nlm.nih.gov/protein/BAA04809.1
+//  actin, aortic smooth muscle isoform 1 [Homo sapiens] https://www.ncbi.nlm.nih.gov/protein/NP_001307784.1
+//C-reactive protein [Homo sapiens] https://www.ncbi.nlm.nih.gov/protein/AAA52075.1
+//neuronal acetylcholine receptor subunit beta-3 isoform 2 [Homo sapiens] https://www.ncbi.nlm.nih.gov/protein/NP_001334646.1
+//oxytocin receptor [Homo sapiens] https://www.ncbi.nlm.nih.gov/protein/NP_001341583.1
+//insulin [Homo sapiens] https://www.ncbi.nlm.nih.gov/protein/AAA59172.1
+
+
+
+
+Organisms
+
+[Odocoileus virginianus texanus]	德州长尾鱼
+[Ornithorhynchus anatinus]	鸭嘴兽
+[Gallus gallus]	原鸡
+[Mauremys reevesii]	海龟
+[Cricetulus griseus]	灰色仓鼠
+[Fukomys damarensis]	大马岩鼠
+[Mus musculus]	小家鼠
+[Delphinapterus leucas]	海豚
+[Vulpes lagopus]	狐狸
+[Theropithecus gelada]	狮尾猿
+[Perca flavescens]	鲈鱼
+[Balaenoptera musculus]	鲸鱼
+[Manis javanica]	爪哇蚕豆
+
+
+
+serum albumin:
+[Nomascus leucogenys]	白纹节菌
+[Hylobates moloch]	长臂猿
+[Theropithecus gelada]	狮尾猿
+[Macaca nemestrina]	猕猴
+[Rhinopithecus roxellana]	金丝猴
+[Chlorocebus sabaeus]	金枪鱼
+[Lynx canadensis]	加拿大山猫
+[Callithrix jacchus]	黄蜂
+[Hyaena hyaena]	鬣狗
+[Puma concolor]	美洲狮
+[Felis catus]	猫
+[Vulpes vulpes]	狐狸
+[Callorhinus ursinus]	海豚
+[Piliocolobus tephrosceles]	毛竹

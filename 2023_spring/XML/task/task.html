@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Garden</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Garden</h1>
+</header>
+<h1 id="xml-assignment-16th-march-1015">XML assignment 16th March, 10:15</h1>
+<p>You have 90 minutes to solve the task. The solution must be uploaded no later than at 11:45. Maximum of 10 points can be achieved. During the class you can use the tutorial, your own code, books, publicly available resources on the Internet. You cannot communicate with each other.</p>
+<p>You are advised to read the Grading section before starting the solution.</p>
+<h2 id="sending-the-solution">Sending the solution</h2>
+<p>Your solution should contain XML, XSD filed and the whole C# project (source files, csproj, sln, etc.). Before sending the solution please remove any output and auxiliary files from the directory (bin, obj, .vs). Everything should be uploaded to moodle in a single zip file.</p>
+<h1 id="data-in-the-xml-file">Data in the XML file</h1>
+<p>The file format has to store information about meals.</p>
+<p>You are provided with a sample file containing the data. <strong>Please note that you have to develop a schema file that matches the description below, schemas that accept the sample file but do not conform to the requirements below will not be accepted.</strong></p>
+<p>The document’s root element is called <code>garden</code>. Inside the element there are three kinds of elements: <code>color</code>, <code>plant</code> and <code>insect</code>. <code>color</code> and <code>plant</code> can be in any order. <code>insect</code> elements must be at the end (it means that after the first occurrence of <code>insect</code> only <code>insect</code> elements can be given).</p>
+<p>The structure of the elements is as follows: - <code>color</code> - attribute <code>name</code>, lowercase string, required, must be unique across all colors - element <code>red</code>, a decimal number with exactly one digit in decimal part, the value must be in the range [0,1]. - element <code>green</code>, a decimal number with exactly one digit in decimal part, the value must be in the range [0,1]. - element <code>blue</code>, a decimal number with exactly one digit in decimal part, the value must be in the range [0,1]. - The child elements red, green, blue must be in exactly that order. - <code>insect</code> - attribute <code>latinName</code> – a string that starts with a capital letter and contains at least one space. <strong>Must be unique across both insects and plants.</strong> - attribute <code>color</code>, lowercase string, <em>must be a name of a color defined in the document</em> - attribute <code>id</code> – a string, must be unique across all plants - one or more <code>month</code> elements. Each <code>month</code> element contains one of the following values (10 possibilities): - January - March - April - May - June - July - August - September - October - November - <code>plant</code> - attribute <code>name</code> – a string - attribute <code>latinName</code> – a string that starts with a capital letter and contains at least one space. <strong>Must be unique across both insects and plants.</strong> - attribute <code>color</code>, lowercase string, <em>must be a name of a color defined in the document</em> - one or more <code>month</code> elements. Each <code>month</code> element contains one of the following values (10 possibilities): - January - March - April - May - June - July - August - September - October - November</p>
+<h1 id="grading">Grading</h1>
+<ul>
+<li>(2 pts) Define XSD that will enforce the structure of the document. No keys and reference enforcement at this point. Modify XML so that elements are connected with XSD definition.</li>
+<li>(1 pt) Do not define common part of <code>plant</code> and <code>insect</code> twice.</li>
+<li>(1 pt) Write a program in C#, that will read the XML given as a command line argument and print to stdout all insects from file in the following format: <code>Insect: {latinName} of color RGB: {R}/{G}/{B}</code> where latingName is a value of the insects respective attribute and R,G,B are values of red, green, blue fields of the insect’s color</li>
+<li>(1 pt) The solution is divided into separate project with class library and separate with console app.</li>
+<li>(1 pt) Classes are automatically generated from XSD during compilation process.</li>
+<li>(1 pt) If the provided XML does not conform to XSD, the program prints an error message and exits.</li>
+<li>(2 pts) Enforce proper references from plants and insects to colors.</li>
+<li>(1 pt) Enforce unique latinName.</li>
+</ul>
+</body>
+</html>

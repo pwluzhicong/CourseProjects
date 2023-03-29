@@ -1,0 +1,68 @@
+# Problem discription - Global Alignment
+    - given 2 nucleotide / amino acid sequences X, Y and a scoring function F
+    - introduce a symbol '-' for gap
+    - Alignment is each pair (X', Y') where elements of X', Y' are from (Sigma Union {'-'}) that meets:
+        - |X'| == |Y'| == N
+        - After removing '-' from X' we get X, from Y' we get Y 
+        - For each j we have X'_j !== '-' or Y'_j == '-'
+        - F(X'_j, Y'_j) = {
+            score_match if X'_j == Y'_j,
+            score_mismatch if X'_j != '-' and Y'j != '-' and X'_j != Y'_j 
+            score_gap if X'_j == '-' or Y'_j == '-'
+        }
+    - To maximize the Score_total = Sum{j=1,2,...,N}(F(X'j, Y'j)). 
+
+# Methods - Needleman-Wunsch algorithem
+    - 2-Dimensional Dynamic programming
+    - For (0, 0) we set score[0][0] = 0
+    - For (i, j) we set score[i][j] = max{
+        score[i-1, j-1] + F(X'_i, Y'_j); if i-1>=0 and j-1>=0, 
+        score[i-1, j] + F(X'_i, '-'); if i-1>=0,
+        score[i, j-1] + F('-', Y'_j); if j-1>=0,
+    }
+    - F(N, N) is the maximum total score
+    
+    The 'Arrow Method' to find the optimal path:
+        if score[i][j] == score[i-1, j-1] + F(X'_i, Y'_j), we set arrow from (i, j) to (i-1, j-1);
+        if score[i][j] == score[i-1, j] + F(X'_i, '-'), we set arrow from (i, j) to (i-1, j);
+        if score[i][j] == score[i, j-1] + F('-', Y'_j), we set arrow from (i, j) to (i, j-1)
+
+    so we can find the optimal path from array_mat[N][N] using DFS
+
+ 
+# Results
+## Homologous genes alignment
+    seq1: NM_033034.3 Homo sapiens tripartite motif containing 5 (TRIM5), transcript variant alpha, mRNA
+    seq2: NM_001032910.1 Macaca mulatta tripartite motif containing 5 (TRIM5), mRNA
+
+    1. match=2, mismatch=-1, gap=0
+        best_score: 5666.0
+
+    2. match=2, mismatch=-1, gap=-2.5
+        best_score: 4511.0
+
+## human and hamster insulin protein alignment
+    seq1: NM_033034.3 Homo sapiens tripartite motif containing 5 (TRIM5), transcript variant alpha, mRNA
+    seq2: NM_001032910.1 Macaca mulatta tripartite motif containing 5 (TRIM5), mRNA
+
+    1. match=2, mismatch=-1, gap=0
+        best_score: 190.0
+
+    2. match=2, mismatch=-1, gap=-2.5
+        best_score: 175.0
+
+# Discussion
+    1. the complexity of this 2-dimensional dynamic programming algorithm is O(n^2)
+
+    2. we can represent arrow using a integer flag using bit-encode:
+            arrow to (i-1, j-1): flag += 1;
+            arrow to (i-1, j): flag += 2;
+            arrow to (i, j-1): flag += 4
+        so we can get:
+            if flag & 1: there is an arrow from (i,j) to (i-1, j-1);
+            if flag & 2: there is an arrow from (i,j) to (i-1, j);
+            if flag & 4: there is an arrow from (i,j) to (i, j-1)
+
+    3. considering that the number of optimal paths could be exponential with the length of sequence
+        (precisely, the number K of nodes in which there are multiple optimal arrows)
+    so we need to set a maximum_size for the optimal paths

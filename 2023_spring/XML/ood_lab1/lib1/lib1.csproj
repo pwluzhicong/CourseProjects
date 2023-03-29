@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<!-- In .net older than 5.0 this element should exist somewhere in csproj. Add Generator rule to it.
+  In newer dotnet you may need to add the whole element. -->
+
+	<ItemGroup>
+		<ResourceFile Include="exercise.xsd">
+			<SubType>Designer</SubType>
+			<Generator>MSBuild:UpdateClassesFromXSD</Generator>
+		</ResourceFile>
+	</ItemGroup>
+	
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+	<!-- Append the following elements at the end of file, just before  </Project> -->
+	<Target Name="UpdateClassesFromXSD" DependsOnTargets="_UpdateClassesFromXSD" Condition="'@(ResourceFile)' != ''">
+		<ItemGroup>
+			<Compile Include="$(IntermediateOutputPath)fromxsd/*.cs" />
+		</ItemGroup>
+	</Target>
+	<Target Name="_UpdateClassesFromXSD" Inputs="exercise.xsd" Outputs="$(IntermediateOutputPath)fromxsd/*.cs">
+		<Exec Command="mkdir $(IntermediateOutputPath)fromxsd" IgnoreExitCode="true" />
+		<Exec Command="&quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools\xsd.exe&quot; /c /n:Library /out:$(IntermediateOutputPath)fromxsd exercise.xsd" />
+	</Target>
+	<PropertyGroup>
+		<CoreCompileDependsOn>UpdateClassesFromXSD;$(CoreCompileDependsOn)</CoreCompileDependsOn>
+	</PropertyGroup>
+</Project>

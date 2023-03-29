@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<schema targetNamespace="http://www.example.org/garden"
+    elementFormDefault="qualified"
+    xmlns="http://www.w3.org/2001/XMLSchema"
+    xmlns:ls="http://www.example.org/garden"
+>
+	<element name="garden">
+		<complexType>
+			<sequence>
+				<choice minOccurs="0" maxOccurs="unbounded">
+					<!--<element name="book" type="ls:book" maxOccurs="unbounded" />-->
+					<element name="color"  type="ls:color" minOccurs="0" maxOccurs="unbounded" />
+					<element name="plant" maxOccurs="unbounded" type="ls:plantType" />
+					<element name="insect" maxOccurs="unbounded" type="ls:insectType" />
+				</choice>
+			</sequence>
+		</complexType>
+		<unique name="oneColor">
+			<selector xpath="ls:color"></selector>
+			<field xpath="@name" />
+		</unique>
+		<unique name="oneLatinName">
+			<selector xpath="ls:plant|ls:insect"></selector>
+			<field xpath="@latinName" />
+		</unique>
+
+		<key name="colorKey">
+			<selector xpath="ls:color" />
+			<field xpath="@name"/>
+		</key>
+		<keyref name="colorRef" refer="ls:colorKey">
+			<selector xpath="ls:plant|ls:insect" />
+			<field xpath="@color" />
+		</keyref>
+
+		<!--<key name="authorKey">
+			<selector xpath="ls:author" />
+			<field xpath="@id"/>
+		</key>
+		<keyref name="authorRef" refer="ls:authorKey">
+			<selector xpath="ls:book/ls:author" />
+			<field xpath="@ref" />
+		</keyref>-->
+	</element>
+	<!--<complexType name="book">
+		<sequence>
+			<group ref="ls:bookElements"></group>
+			--><!--<element name="title" type="ls:titleType" />
+			<element name="year" type="ls:yearType" />
+			<element name="language" type="ls:languageType" />--><!--
+			<element name="author" maxOccurs="unbounded">
+				<complexType>
+					<attribute name="ref" type="string"></attribute>	
+				</complexType>
+			</element>
+			--><!--<element name="author" type="ls:author" maxOccurs="unbounded" />--><!--
+		</sequence>
+	</complexType>-->
+	<!--<complexType name="authors">
+		<sequence>
+			<element name="author" maxOccurs="unbounded" type="ls:author" />
+		</sequence>
+	</complexType>-->
+
+	<!--<group name="bookElements">
+		<sequence>
+			<element name="title" type="ls:titleType" />
+			<element name="year" type="ls:yearType" />
+			<element name="language" type="ls:languageType" />
+		</sequence>
+	</group>-->
+
+	<complexType name="baseType">
+		<sequence>
+			<element name="month" type="ls:monthType"  maxOccurs="unbounded"/>
+		</sequence>
+		<attribute name="latinName" type="string" />
+		<attribute name="color" type="string" />
+	</complexType>
+
+	<complexType name="plantType">
+		<complexContent>
+			<extension base="ls:baseType">
+				<attribute name="name" type="string"></attribute>
+				<attribute name="id" type="string"></attribute>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="insectType">
+		<complexContent>
+			<extension base="ls:baseType">
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<simpleType name="monthType">
+		<restriction base="string">
+			<enumeration value="January" />
+			<enumeration value="March" />
+			<enumeration value="April" />
+			<enumeration value="May" />
+			<enumeration value="June" />
+			<enumeration value="July" />
+			<enumeration value="August" />
+			<enumeration value="September" />
+			<enumeration value="October" />
+			<enumeration value="November" />
+		</restriction>
+	</simpleType>
+	
+		
+	<complexType name="color">
+		<sequence>
+			<element name="red" type="ls:colorComponent" />
+			<element name="green" type="ls:colorComponent" />
+			<element name="blue" type="ls:colorComponent" />
+		</sequence>
+		<attribute name="name" type="string"/>
+		<!--<attribute name="id" type="string"></attribute>-->
+		
+	</complexType>
+
+	<simpleType name="colorComponent">
+		<restriction base="float">
+			<minInclusive value="0" />
+			<maxInclusive value="1" />
+		</restriction>
+	</simpleType>
+
+	
+	<!--<simpleType name="titleType">
+		<restriction base="string">
+			<minLength value="3" />
+			
+		</restriction>
+	</simpleType>
+	<simpleType name="languageType">
+		<restriction base="string">
+			<enumeration value="EN" />
+			<enumeration value="PL" />
+			<enumeration value="TLH" />
+		</restriction>
+	</simpleType>
+	<simpleType name="yearType">
+	<restriction base="int">
+		<minInclusive value="1120" />
+	</restriction>-->
+		
+	<!--</simpleType>-->
+</schema>
